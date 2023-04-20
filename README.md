@@ -84,7 +84,9 @@ now shut it down
 
 # Now again go to the oracle VM box
 i. right click on kube-master Vmachine
+
 ii. click clone
+
 iii. name it kube-node1 - reinitialize the mac address of each network card - linked clone
 
 right click on kube-master Vmachine again to make second node
