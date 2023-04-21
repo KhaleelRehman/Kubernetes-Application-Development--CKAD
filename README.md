@@ -207,40 +207,29 @@ run on all the 3 nodes
     sudo install -m 0755 -d /etc/apt/keyrings
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
     sudo chmod a+r /etc/apt/keyrings/docker.gpg
-
-
-   echo \
-   "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
-   "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
-   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    echo \
+    "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+    "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
+    sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
 
 # install docker
 
     sudo apt-get update
-    apt-cache madison docker-ce
-    sudo apt-get install docker-ce=  specific version
-
-    sudo docker version 
-
-
-# install kubeadm, kublet, kubectl 
-
-run on all nodes
-# packages for k8s
+    sudo apt-get install docker.io
     sudo apt-get update
-    sudo apt-get install -y apt-transport-https ca-certificates curl
-
-# key file
-    sudo curl -fsSLo /etc/apt/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
-
-# lists sources
-    echo "deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
-
-# install kubelet kubecl,kudeadm
+    sudo apt-get install -y apt-transport-https curl
+    
+   # key file
+    curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+   
+   # lists sources
+    echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+    
+   # install kubelet kubecl,kudeadm
     sudo apt-get update
     sudo apt-get install -y kubelet kubeadm kubectl
-    sudo apt-mark hold kubelet kubeadm kubectl
+
 
 
 # set pod network
@@ -248,14 +237,15 @@ run on all nodes
 make master node
  run on master node
 
-    sudo kubeadm init --pod-network-cidr=10.244.0.0/16 --apiserver-advertise-address=192.168.56.2
+    sudo kubeadm init --pod-network-cidr=10.244.0.0/16 
 
 link nodes token
 Token will be provided after running above command in master node
 
 # setting up pod network
 
-    kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/v0.10.0/Documentation/kube-flannel.yml
+    kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
+
 
 
 # check kube-dns running or not - 
