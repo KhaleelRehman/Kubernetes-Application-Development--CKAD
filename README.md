@@ -43,7 +43,7 @@ iii.download and install Mobaxterm https://mobaxterm.mobatek.net/download-home-e
 	goto to network > change default address Nat to Bridged Adapter
 	now take a snapshot named it Before Initial PowerUp
 
-Now start virtaul machine
+Now start virtual machine
 
 after that, login will require a password which will be 
 
@@ -53,19 +53,31 @@ search terminal - open it
 
 write command to see the ip/inet address assign to it
 
-    ifconfig
+    ip -br a
+# if not getting ipv4 follow the steps otherwise skip this steps
+		sudo systemctl enable systemd-networkd.service
+		sudo systemctl start systemd-networkd.service
+		sudo systemctl status systemd-networkd.service
+		sudo dhclient -v enp0s3
+
 
 now see the ssh service is running
 
-    service ssh status
+    sudo systemctl status ssh.service
+
 
 if not running than install it by going to root:
 
 		sudo su
 		password: osboxes.org
 		apt-get update
-		apt-get install openssh-server
-		service ssh status
+		sudo apt-get install openssh-server
+		sudo systemctl status ssh.service
+
+if service still not running
+		
+		sudo apt-get --reinstall install openssh-server
+
 
 # to ssh terminal open mobaxterm
 
@@ -99,11 +111,15 @@ Next step to set the hostnames
 first become root user: 
 
     sudo su
+    
 two steps to change the hostname	
+    
     cat /etc/hostname
+
 osboxes
 
     vi /etc/hostname
+
 delete existing name and change to kubemaster - to save - :wq!
 
     vi /etc/hosts
