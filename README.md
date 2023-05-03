@@ -267,13 +267,24 @@ cilium
 
 # CKAD focuses
 1. Core concepts: be able to create and modify basic components, such as pods, services, and deployments.
+	kubectl apply -f poddef.yml
+	kubectl get pods
+	kubectl apply -f deployment-definition.yml
+	kubectl get deployments
+	kubectl scale --replicas=5 deployment/nginx-deployment
+	kubectl get deployments
+	kubectl apply -f nginx-service.yaml
+	kubectl get services
+
 2. Configuration: Know how to use ConfigMaps and Secrets to configure applications 
 3. Multi-container pods: Understand how to define and run multiple containers in a pod
 4. Observability: Be familiar with logging and monitoring Kubernetes applications using tools such as kubectl, logs, and metrics.
 5. Pod design: Be able to design and create effective and efficient pod configurations using labels, annotations, and affinity/anti-affinity rules.
 6. Services and networking: Understand how to create and use services to expose applications and connect pods together within a cluster.
 7. State persistence: Know how to manage stateful applications in Kubernetes using StatefulSets, Persistent Volumes, and Persistent Volume Claims.
-8. Application lifecycle management: Be able to roll out and roll back deployments, perform rolling updates, and use readiness and liveness probes to monitor application health.
+9. Application lifecycle management: Be able to roll out and roll back deployments, perform rolling updates, and use readiness and liveness probes to monitor application health.
+
+
 
 
 
