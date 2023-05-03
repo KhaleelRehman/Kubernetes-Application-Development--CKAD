@@ -215,36 +215,25 @@ run on all the 3 nodes
 
 # install docker
 
-    sudo apt-get update
-    sudo apt-get install docker.io
-    sudo apt-get update
-    sudo apt-get install -y apt-transport-https curl
-    
-   # key file
-    curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
-   
-   # lists sources
-    echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
-    
-   # install kubelet kubecl,kudeadm
-    sudo apt-get update
-    sudo apt-get install -y kubelet kubeadm kubectl
+  
+# installing docker, kubectl, kubelet, kubeadm
 
+sudo apt-get update
+sudo apt-get install docker.io
+sudo apt-get update
+sudo apt-get install -y apt-transport-https curl
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+sudo apt-get update
+sudo apt-get install -y kubelet kubeadm kubectl
 
+# initialize master node
 
-# set pod network
+sudo kubeadm init --pod-network-cidr=10.244.0.0/16
+kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
 
-make master node
- run on master node
-
-    sudo kubeadm init --pod-network-cidr=10.244.0.0/16 
-
-link nodes token
-Token will be provided after running above command in master node
-
-# setting up pod network
-
-    kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
+# join worker node
+sudo kubeadm join <control-plane-host>:<control-plane-port> --token <token> --discovery-token-ca-cert-hash <hash>
 
 
 
