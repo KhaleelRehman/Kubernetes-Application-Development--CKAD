@@ -230,7 +230,19 @@ run on all the 3 nodes
 # initialize master node
 
 		sudo kubeadm init --pod-network-cidr=10.244.0.0/16
+
+# installing pod net work
 		kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
+# if not working alternative pod networks:
+flannel
+
+		kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+weave net
+
+		kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
+cilium
+		
+		kubectl create -f https://raw.githubusercontent.com/cilium/cilium/v1.9/install/kubernetes/quick-install.yaml
 
 # join worker node
 
