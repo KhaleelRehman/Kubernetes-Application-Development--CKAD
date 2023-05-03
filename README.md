@@ -263,6 +263,16 @@ Token will be provided after running above command in master node
     kubectl delete deployment/nginx
 
 
+# CKAD focuses
+1. Core concepts: be able to create and modify basic components, such as pods, services, and deployments.
+2. Configuration: Know how to use ConfigMaps and Secrets to configure applications 
+3. Multi-container pods: Understand how to define and run multiple containers in a pod
+4. Observability: Be familiar with logging and monitoring Kubernetes applications using tools such as kubectl, logs, and metrics.
+5. Pod design: Be able to design and create effective and efficient pod configurations using labels, annotations, and affinity/anti-affinity rules.
+6. Services and networking: Understand how to create and use services to expose applications and connect pods together within a cluster.
+7. State persistence: Know how to manage stateful applications in Kubernetes using StatefulSets, Persistent Volumes, and Persistent Volume Claims.
+8. Application lifecycle management: Be able to roll out and roll back deployments, perform rolling updates, and use readiness and liveness probes to monitor application health.
+
 
 
 
