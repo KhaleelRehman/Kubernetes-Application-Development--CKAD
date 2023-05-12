@@ -268,21 +268,25 @@ cilium
 # CKAD focuses
 1. Core concepts: be able to create and modify basic components, such as pods, services, and deployments.
 
-		kubectl apply -f poddef.yml
+		kubectl apply -f nginx-pod.yaml
 		kubectl get pods
-		kubectl apply -f deployment-definition.yml
+		kubectl apply -f nginx-replicaset.yaml
+		kubectl get replicasets
+		kubectl apply -f nginx-deployment.yaml
 		kubectl get deployments
 		kubectl scale --replicas=5 deployment/nginx-deployment
 		kubectl get deployments
-		kubectl apply -f service.yml
+		kubectl apply -f nginx-service.yaml
 		kubectl get services
 
 2. Configuration: Know how to use ConfigMaps and Secrets to configure applications 
 
-		kubectl apply -f configmap.yml
-		kubectl get pods
-		kubectl apply -f nginx-secret.yaml
-		kubectl get pods
+		kubectl apply -f app-config.yaml
+		kubectl get configmaps
+		kubectl describe configmap <configmap-name>
+		kubectl apply -f my-secret.yaml
+		kubectl get secrets
+		kubectl describe secret <secret-name>
 
 
 4. Multi-container pods: Understand how to define and run multiple containers in a pod
@@ -295,8 +299,55 @@ cilium
 6. Observability: Be familiar with logging and monitoring Kubernetes applications using tools such as kubectl, logs, and metrics.
 7. Pod design: Be able to design and create effective and efficient pod configurations using labels, annotations, and affinity/anti-affinity rules.
 8. Services and networking: Understand how to create and use services to expose applications and connect pods together within a cluster.
-9. State persistence: Know how to manage stateful applications in Kubernetes using StatefulSets, Persistent Volumes, and Persistent Volume Claims.
-10. Application lifecycle management: Be able to roll out and roll back deployments, perform rolling updates, and use readiness and liveness probes to monitor application health.
+
+
+jobs
+			
+	kubectl apply -f pi-job.yaml
+	kubectl get jobs
+	kubectl describe job <job-name>
+	
+cronjobs
+
+	kubectl apply -f hello-cron.yaml
+	kubectl get cronjobs
+	kubectl describe cronjob <cronjob-name>
+
+
+10. State persistence: Know how to manage stateful applications in Kubernetes using StatefulSets, Persistent Volumes, and Persistent Volume Claims.
+
+		kubectl apply -f my-pv.yaml
+		kubectl get pv
+		kubectl describe pv <pv-name>
+		
+		kubectl apply -f my-pvc.yaml
+		kubectl get pvc
+		kubectl describe pvc <pvc-name>
+		
+		
+		kubectl apply -f my-statefulset.yaml
+		kubectl get statefulsets
+		kubectl describe statefulset <statefulset-name>
+		
+		kubectl apply -f my-ingress.yaml
+		kubectl get ingresses
+		kubectl describe ingress <ingress-name>
+
+		kubectl apply -f my-network-policy.yaml
+		kubectl get networkpolicies
+		kubectl describe networkpolicy <network-policy-name>
+
+		kubectl apply -f my-resource-quota.yaml
+		kubectl get resourcequotas
+		kubectl describe resourcequota <resource-quota-name>
+		
+		kubectl apply -f my-hpa.yaml
+		kubectl get hpa
+		kubectl describe hpa <hpa-name>
+
+
+
+12. Application lifecycle management: Be able to roll out and roll back deployments, perform rolling updates, and use readiness and liveness probes to monitor application health.
 
 
 
