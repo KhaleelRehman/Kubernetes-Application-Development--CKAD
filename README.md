@@ -276,6 +276,12 @@ cilium
 		kubectl get deployments
 		kubectl scale --replicas=5 deployment/nginx-deployment
 		kubectl get deployments
+		
+		kubectl apply -f my-namespace.yaml
+		kubectl get namespaces
+		kubectl describe namespace my-namespace
+
+		
 		kubectl apply -f nginx-service.yaml
 		kubectl get services
 
