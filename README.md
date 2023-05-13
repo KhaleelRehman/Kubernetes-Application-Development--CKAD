@@ -350,6 +350,20 @@ cronjobs
 		kubectl apply -f my-hpa.yaml
 		kubectl get hpa
 		kubectl describe hpa <hpa-name>
+		
+		
+		kubectl apply -f my-service-account.yaml
+		kubectl get serviceaccounts -n my-namespace
+		kubectl describe serviceaccount my-service-account -n my-namespace
+		kubectl describe secret <name of token>
+
+	resource limit
+	
+		kubectl apply -f my-pod.yaml
+		kubectl get pods -n my-namespace
+		kubectl describe pod my-pod -n my-namespace
+
+
 
 
 
