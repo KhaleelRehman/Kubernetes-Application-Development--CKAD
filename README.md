@@ -267,26 +267,44 @@ cilium
 
 # CKAD focuses
 1. Core concepts: be able to create and modify basic components, such as pods, services, and deployments.
+2. Multi-container pods: Understand how to define and run multiple containers in a pod
+3. Configuration: Know how to use ConfigMaps and Secrets to configure applications 
+4. Observability: Be familiar with logging and monitoring Kubernetes applications using tools such as kubectl, logs, and metrics.
+5. Pod design: Be able to design and create effective and efficient pod configurations using labels, annotations, and affinity/anti-affinity rules.
+6. Services and networking: Understand how to create and use services to expose applications and connect pods together within a cluster.
+7. State persistence: Know how to manage stateful applications in Kubernetes using StatefulSets, Persistent Volumes, and Persistent Volume Claims.
+8. Application lifecycle management: Be able to roll out and roll back deployments, perform rolling updates, and use readiness and liveness probes to monitor application health.
+
+	# Pods
 
 		kubectl apply -f nginx-pod.yaml
 		kubectl get pods
+		
+	# Replicasets
+		
 		kubectl apply -f nginx-replicaset.yaml
 		kubectl get replicasets
+		
+	# Deployments
+		
 		kubectl apply -f nginx-deployment.yaml
 		kubectl get deployments
 		kubectl scale --replicas=5 deployment/nginx-deployment
 		kubectl get deployments
-		
+	
+	# Namespaces
+	
 		kubectl apply -f my-namespace.yaml
 		kubectl get namespaces
 		kubectl describe namespace my-namespace
 
-		
+	# Services
+	
 		kubectl apply -f nginx-service.yaml
 		kubectl get services
-
-2. Configuration: Know how to use ConfigMaps and Secrets to configure applications 
-
+	
+	# Configmaps & Secrets
+	
 		kubectl apply -f app-config.yaml
 		kubectl get configmaps
 		kubectl describe configmap <configmap-name>
@@ -294,34 +312,32 @@ cilium
 		kubectl get secrets
 		kubectl describe secret <secret-name>
 
-
-4. Multi-container pods: Understand how to define and run multiple containers in a pod
+	# Multicontainers
 
 		kubectl apply -f multi-container-pod.yaml
 		kubectl get pods
+		
+	# liveness and readiness probes
+		
 		kubectl apply -f nginx-liveness-readiness.yaml
 		kubectl get deployments
 
-6. Observability: Be familiar with logging and monitoring Kubernetes applications using tools such as kubectl, logs, and metrics.
-7. Pod design: Be able to design and create effective and efficient pod configurations using labels, annotations, and affinity/anti-affinity rules.
-8. Services and networking: Understand how to create and use services to expose applications and connect pods together within a cluster.
 
-
-jobs
+	# jobs
 			
-	kubectl apply -f pi-job.yaml
-	kubectl get jobs
-	kubectl describe job <job-name>
+		kubectl apply -f pi-job.yaml
+		kubectl get jobs
+		kubectl describe job <job-name>
+
+	# cronjobs
+
+		kubectl apply -f hello-cron.yaml
+		kubectl get cronjobs
+		kubectl describe cronjob <cronjob-name>
+
+
+	# Persistence Volume
 	
-cronjobs
-
-	kubectl apply -f hello-cron.yaml
-	kubectl get cronjobs
-	kubectl describe cronjob <cronjob-name>
-
-
-10. State persistence: Know how to manage stateful applications in Kubernetes using StatefulSets, Persistent Volumes, and Persistent Volume Claims.
-
 		kubectl apply -f my-pv.yaml
 		kubectl get pv
 		kubectl describe pv <pv-name>
@@ -330,28 +346,39 @@ cronjobs
 		kubectl get pvc
 		kubectl describe pvc <pvc-name>
 		
-		
+	
+	# Statefulsets
+	
 		kubectl apply -f my-statefulset.yaml
 		kubectl get statefulsets
 		kubectl describe statefulset <statefulset-name>
-		
+	
+	# Ingress
+	
 		kubectl apply -f my-ingress.yaml
 		kubectl get ingresses
 		kubectl describe ingress <ingress-name>
-
+	
+	# Network policy
+	
 		kubectl apply -f my-network-policy.yaml
 		kubectl get networkpolicies
 		kubectl describe networkpolicy <network-policy-name>
-
+	
+	# Resource Quota
+	
 		kubectl apply -f my-resource-quota.yaml
 		kubectl get resourcequotas
 		kubectl describe resourcequota <resource-quota-name>
-		
+	
+	# Horizontal Pod Autoscaling (HPA)
+	
 		kubectl apply -f my-hpa.yaml
 		kubectl get hpa
 		kubectl describe hpa <hpa-name>
 		
-		
+	# Service Accounts
+	
 		kubectl apply -f my-service-account.yaml
 		kubectl get serviceaccounts -n my-namespace
 		kubectl describe serviceaccount my-service-account -n my-namespace
@@ -362,12 +389,49 @@ cronjobs
 		kubectl apply -f my-pod.yaml
 		kubectl get pods -n my-namespace
 		kubectl describe pod my-pod -n my-namespace
+		
+	liveness and readiness probes
+		
+		kubectl apply -f readiness-liveness-probes.yaml
+		kubectl get pods -n my-namespace
+		kubectl describe pod readiness-liveness-probes -n my-namespace
+		
+	container logging
+	
+		kubectl apply -f my-pod-log.yaml
+		kubectl get pods -n my-namespace
+		kubectl describe pod my-pod-log -n my-namespace
+		kubectl logs my-pod-log -c my-container -n my-namespace
+		
+		
+	pod design
+	
+		kubectl apply -f pod.yaml
+		kubectl get pods -l app=my-updated-app
+		kubectl describe pod another-pod
+
+	rollback and rolling updates
+	
+		kubectl apply -f updated-deployment.yaml
+		kubectl apply -f rollback-deployment.yaml
+		kubectl get deployment my-deployment
+		kubectl get deployment my-deployment
+		kubectl rollout status deployment/my-deployment
+		kubectl rollout history deployment/my-deployment
+		kubectl rollout undo deployment/my-deployment
+
+
+		
+		
+		
 
 
 
 
 
-12. Application lifecycle management: Be able to roll out and roll back deployments, perform rolling updates, and use readiness and liveness probes to monitor application health.
+
+
+
 
 
 
