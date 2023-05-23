@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: another-pod
+  labels:
+    app: my-updated-app
+    tier: frontend
+  annotations:
+    version: "1.0"
+spec:
+  containers:
+    - name: my-container
+      image: nginx
